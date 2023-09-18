@@ -10,23 +10,23 @@ interface Props {
 }
 
 interface Emits {
-  onClick: () => void;
+  (e: 'onClick'): void;
 }
 
-withDefaults(defineProps<Props>(), {
+  const props = withDefaults(defineProps<Props>(), {
   kind: 'primary',
   size: 'medium'
 });
-defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 </script>
 
 <template>
   <button
-      :class="['btn', `btn-${kind}`, `btn-${size}`]"
-      :disabled="disabled"
-      @click="$emit('onClick')">
-    <font-awesome-icon v-if="!!icon" :icon="['far', icon]" />
-    {{ title }}
+      :class="['btn', `btn-${props.kind}`, `btn-${props.size}`]"
+      :disabled="props.disabled"
+      @click="emit('onClick')">
+    <font-awesome-icon v-if="!!props.icon" :icon="['far', props.icon]" />
+    {{ props.title }}
   </button>
 </template>
 

@@ -11,30 +11,30 @@ interface Props {
 }
 
 interface Emits {
-  'update:modelValue': () => void;
-  onEnter?: () => void;
-  onFocus?: () => void;
+  (e: 'update:modelValue', event: Event): void;
+  (e: 'onEnter'): void;
+  (e: 'onFocus'): void;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   kind: 'primary',
   size: 'medium',
   type: 'text',
 });
 
-defineEmits<Emits>()
+const emit = defineEmits<Emits>()
 </script>
 
 <template>
 <input
-  :value="modelValue"
-  :class="['input', `input-${kind}`, `input-${size}`]"
-  :disabled="disabled"
-  :type="type"
-  :placeholder="placeholder"
-  @input="$emit('update:modelValue', $event.target.value)"
-  @keydown.enter="$emit('onEnter')"
-  @focus="$emit('onFocus')"
+  :value="props.modelValue"
+  :class="['input', `input-${props.kind}`, `input-${props.size}`]"
+  :disabled="props.disabled"
+  :type="props.type"
+  :placeholder="props.placeholder"
+  @input="emit('update:modelValue', $event.target.value)"
+  @keydown.enter="emit('onEnter')"
+  @focus="emit('onFocus')"
 />
 </template>
 

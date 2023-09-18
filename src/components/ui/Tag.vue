@@ -11,24 +11,24 @@ interface Props {
 }
 
 interface Emits {
-  onClick: () => void;
-  onRemove?: () => void;
+  (e: 'onClick'): void;
+  (e: 'onRemove'): void;
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   kind: 'primary',
   size: 'medium',
   removable: false
 });
 
-defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 </script>
 
 <template>
-<div :class="['tag', `tag-${kind}`, `tag-${size}`]" @click="$emit('onClick')">
-  <font-awesome-icon v-if="!!icon" :icon="['far', icon]" />
-  {{ title }}
-  <font-awesome-icon v-if="removable" class="removeIcon" :icon="['far', removeIcon]" @click="$emit('onRemove')" />
+<div :class="['tag', `tag-${props.kind}`, `tag-${props.size}`]" @click="emit('onClick')">
+  <font-awesome-icon v-if="!!props.icon" :icon="['far', props.icon]" />
+  {{ props.title }}
+  <font-awesome-icon v-if="props.removable" class="removeIcon" :icon="['far', props.removeIcon]" @click="emit('onRemove')" />
 </div>
 </template>
 

@@ -8,40 +8,40 @@ interface Props {
 }
 
 interface Emits {
-  addCategory: (event: any) => void;
-  removeCategory: (category: Categories) => void;
-  clearCategories: () => void;
+  (e: 'addCategory', category: Categories | string): void;
+  (e: 'removeCategory', category: Categories): void;
+  (e: 'clearCategories'): void;
 }
 
 const props = defineProps<Props>();
-const emits = defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 
 const availableCategories = computed(() => Object.values(Categories).filter((category) => !props.categories.includes(category)));
 const showCustomCategoryInput = ref(false);
 const customCategory = ref("");
-const customCategoryInput = ref();
 
 const addCategory = (category) => {
-  emits("addCategory", category);
+  emit("addCategory", category);
 }
 
 const clearCategories = () => {
-  emits("clearCategories");
+  emit("clearCategories");
 }
 
 const addCustomCategory = () => {
   if (customCategory.value.length) {
-    emits("addCategory", customCategory.value);
+    emit("addCategory", customCategory.value);
     customCategory.value = "";
     showCustomCategoryInput.value = false;
   }
 }
 
-const displayCustomCategoryInput = () => {
+const displayCustomCategoryInput = async () => {
+  const customCategoryInput = document.getElementById('customCategoryInput');
+
   showCustomCategoryInput.value = true;
-  nextTick(() => {
-    customCategoryInput.value?.focus();
-  })
+  await nextTick();
+  customCategoryInput?.focus();
 }
 </script>
 
@@ -56,7 +56,7 @@ const displayCustomCategoryInput = () => {
         :size="'small'"
         :removable="true"
         :removeIcon="'trash-can'"
-        @onRemove="$emit('removeCategory', category)"
+        @onRemove="emit('removeCategory', category)"
     />
     <Tag
         v-for="category in availableCategories"

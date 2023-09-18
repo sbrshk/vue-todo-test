@@ -8,7 +8,7 @@ interface Props {
   item: TodoItem
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
 
 const {checkTodo, removeTodo} = useTodoStore();
 </script>
@@ -16,10 +16,10 @@ const {checkTodo, removeTodo} = useTodoStore();
 <template>
   <div class="wrapper">
     <div class="item">
-      <input class="itemCheckbox" type="checkbox" :checked="item.checked" @change="checkTodo(item.id)" />
-      <span :style="{textDecoration: item.checked ? 'line-through' : 'none'}">{{item.title}}</span>
+      <input class="itemCheckbox" type="checkbox" :checked="props.item.checked" @change="checkTodo(props.item.id)" />
+      <span :style="{textDecoration: props.item.checked ? 'line-through' : 'none'}">{{props.item.title}}</span>
       <Tag
-          v-for="category in item.categories"
+          v-for="category in props.item.categories"
           :key="category"
           :title="category"
           :icon="'flag'"
@@ -31,7 +31,7 @@ const {checkTodo, removeTodo} = useTodoStore();
       :icon="'trash-can'"
       :kind="'ghost'"
       :size="'small'"
-      @onClick="removeTodo(item.id)"
+      @onClick="removeTodo(props.item.id)"
     />
   </div>
 </template>
