@@ -55,7 +55,7 @@ const addTodoItem = () => {
     />
   </div>
   <AddCategories
-      v-show="todoTitle.length"
+      v-if="todoTitle.length"
       :categories="categories"
       @addCategory="addCategory"
       @removeCategory="removeCategory"

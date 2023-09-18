@@ -37,62 +37,62 @@ const addCustomCategory = () => {
 }
 
 const displayCustomCategoryInput = async () => {
-  const customCategoryInput = document.getElementById('customCategoryInput');
-
   showCustomCategoryInput.value = true;
+
+  const customCategoryInput = document.querySelector('#customCategoryInput');
   await nextTick();
-  customCategoryInput?.focus();
+
+  // TODO: investigate later
+  console.log(customCategoryInput) // null
+  // customCategoryInput.focus();
 }
 </script>
 
 <template>
-  <div>
   <div class="wrapper">
     <Tag
         v-for="category in props.categories"
         :key="category"
         :title="category"
-        :kind="'ghost'"
-        :size="'small'"
-        :removable="true"
-        :removeIcon="'trash-can'"
+        removable
+        removeIcon="trash-can"
+        kind="ghost"
+        size="small"
         @onRemove="emit('removeCategory', category)"
     />
     <Tag
         v-for="category in availableCategories"
         :key="category"
         :title="category"
-        :icon="'square-plus'"
-        :kind="'secondary'"
-        :size="'small'"
+        icon="square-plus"
+        kind="secondary"
+        size="small"
         @onClick="addCategory(category)"
     />
     <Button
-        v-show="showCustomCategoryInput === false"
-        :icon="'square-plus'"
-        :kind="'primary'"
-        :size="'medium'"
+        v-if="!showCustomCategoryInput"
+        icon="square-plus"
+        kind="primary"
+        size="medium"
         @onClick="displayCustomCategoryInput"
     />
     <Input
-        v-show="showCustomCategoryInput === true"
+        v-if="showCustomCategoryInput"
         v-model="customCategory"
         ref="customCategoryInput"
-        :size="'small'"
-        :placeholder="'New category...'"
+        size="small"
+        placeholder="New category..."
         @onEnter="addCustomCategory"
     />
   </div>
   <div class="wrapper">
-
     <Button
-        v-show="props.categories.length"
-        :title="'Clear categories'"
-        :icon="'circle-xmark'"
-        :kind="'secondary'"
+        v-if="props.categories.length"
+        title="Clear categories"
+        icon="circle-xmark"
+        kind="secondary"
         @onClick="clearCategories"
     />
-  </div>
   </div>
 </template>
 

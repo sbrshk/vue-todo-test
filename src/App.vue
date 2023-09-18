@@ -20,7 +20,7 @@ const todoStore = useTodoStore();
       :item="todo"
     />
     <Button
-        v-show="!!todoStore.count"
+        v-if="!!todoStore.count"
         :title="'Remove all tasks'"
         :icon="'circle-xmark'"
         :kind="'secondary'"
