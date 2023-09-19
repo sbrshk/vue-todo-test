@@ -1,35 +1,22 @@
 <script setup>
-import AddTodo from "./components/AddTodo.vue";
-import TodoItem from "./components/TodoItem.vue";
 
-import {useTodoStore} from "./stores/todo";
-import TasksCounter from "./components/TasksCounter.vue";
-import {Button} from "./components/ui";
-
-const todoStore = useTodoStore();
 </script>
 
 <template>
   <main>
-    <h1>ToDo list</h1>
-    <TasksCounter />
-    <AddTodo />
-    <TodoItem
-      v-for="todo in todoStore.todoList"
-      :key="todo.id"
-      :item="todo"
-    />
-    <Button
-        v-if="!!todoStore.count"
-        :title="'Remove all tasks'"
-        :icon="'circle-xmark'"
-        :kind="'secondary'"
-        :size="'large'"
-        @onClick="todoStore.clearTodoList"
-    />
+    <div id="nav">
+      <router-link to="/">Home</router-link> |
+      <router-link to="/about">About</router-link> |
+      <router-link to="/cabinet">Cabinet</router-link>
+    </div>
+    <router-view/>
   </main>
 </template>
 
 <style scoped>
-
+ main {
+   width: 50vw;
+   height: 70vh;
+   margin: 15vh 25vw
+ }
 </style>

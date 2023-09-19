@@ -1,4 +1,5 @@
 import './assets/main.css'
+import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 
 /* import font awesome icon component */
@@ -16,4 +17,4 @@ import App from './App.vue'
 
 const pinia = createPinia();
 
-createApp(App).use(pinia).component('font-awesome-icon', FontAwesomeIcon).mount('#app');
+createApp(App).use(router).use(pinia).component('font-awesome-icon', FontAwesomeIcon).mount('#app');
