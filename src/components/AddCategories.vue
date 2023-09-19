@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import {defineProps, defineEmits, ref, computed, nextTick} from "vue";
 import {Categories} from "../types";
-import {Button, Input, Tag} from "../components/ui";
+import Button from "./ui/Button.vue";
+import Input from "./ui/Input.vue";
+import Tag from "./ui/Tag.vue";
 
 interface Props {
   categories: any[];

@@ -2,7 +2,8 @@
 
 import {TodoItem} from "../types";
 import {useTodoStore} from "../stores/todo";
-import {Button, Tag} from "./ui";
+import Button from "./ui/Button.vue";
+import Tag from "./ui/Tag.vue";
 
 interface Props {
   item: TodoItem

@@ -4,7 +4,7 @@ import TodoItem from "../components/TodoItem.vue";
 
 import {useTodoStore} from "../stores/todo";
 import TasksCounter from "../components/TasksCounter.vue";
-import {Button} from "../components/ui";
+import Button from "../components/ui/Button.vue";
 
 const todoStore = useTodoStore();
 </script>

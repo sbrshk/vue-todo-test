@@ -3,7 +3,8 @@ import {v4 as uuidv4} from 'uuid';
 import {useTodoStore} from "../stores/todo";
 import {ref} from "vue";
 import AddCategories from "../components/AddCategories.vue";
-import {Button, Input} from "./ui";
+import Button from "../components/ui/Button.vue";
+import Input from "../components/ui/Input.vue";
 
 const {addTodo} = useTodoStore();
 
