@@ -8,11 +8,10 @@ const { randomizeInt } = useRandom();
 
 const photoId = ref(randomizeInt(250));
 const photoUrl = computed(() => `https://jsonplaceholder.typicode.com/photos/${photoId.value}`)
-const {data, error, refetch} = useFetch(photoUrl);
+const {data, error} = useFetch(photoUrl);
 
 const updatePhotoId = () => {
   photoId.value = randomizeInt(250);
-  refetch();
 }
 </script>
 
